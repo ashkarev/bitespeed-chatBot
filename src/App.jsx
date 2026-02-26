@@ -1,11 +1,14 @@
 
 import './App.css'
+import FlowBuilder from './components/FlowBuilder'
 
 function App() {
 
   return (
     <>
-     haiiiii
+     <div className="w-screen h-screen flex">
+      <FlowBuilder />
+    </div>
     </>
   )
 }
