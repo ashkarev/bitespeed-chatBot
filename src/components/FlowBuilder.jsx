@@ -13,11 +13,9 @@ function FlowBuilder() {
 
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
-
-  // 🔹 NEW: selected node state
   const [selectedNode, setSelectedNode] = useState(null);
 
-  // connect nodes (only one outgoing edge allowed)
+  // 🔹 connect nodes (only one outgoing edge allowed)
   const onConnect = (params) => {
     const alreadyHasEdge = edges.some(
       (edge) => edge.source === params.source
@@ -31,13 +29,13 @@ function FlowBuilder() {
     setEdges((prev) => addEdge(params, prev));
   };
 
-  // allow dropping
+  // 🔹 allow drop
   const onDragOver = (event) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   };
 
-  // handle drop
+  // 🔹 handle drop (create node)
   const onDrop = (event) => {
     event.preventDefault();
 
@@ -58,12 +56,12 @@ function FlowBuilder() {
     setNodes((prev) => [...prev, newNode]);
   };
 
-  // 🔹 NEW: when node is clicked
+  // 🔹 when node clicked
   const onNodeClick = (event, node) => {
     setSelectedNode(node);
   };
 
-  // 🔹 NEW: update node text
+  // 🔹 update node text
   const updateNodeText = (value) => {
     setNodes((prevNodes) =>
       prevNodes.map((n) =>
@@ -73,11 +71,36 @@ function FlowBuilder() {
       )
     );
 
-    // also update selectedNode state
     setSelectedNode((prev) => ({
       ...prev,
       data: { ...prev.data, label: value },
     }));
+  };
+
+  // 🔹 SAVE + VALIDATION
+  const handleSave = () => {
+    if (nodes.length === 0) {
+      alert("Nothing to save");
+      return;
+    }
+
+    // nodes with no outgoing edge
+    const nodesWithoutOutgoing = nodes.filter((node) => {
+      const hasOutgoing = edges.some(
+        (edge) => edge.source === node.id
+      );
+      return !hasOutgoing;
+    });
+
+    if (nodesWithoutOutgoing.length > 1) {
+      alert("Error: More than one node has no outgoing connection");
+      return;
+    }
+
+    const flowData = { nodes, edges };
+    localStorage.setItem("chatbotFlow", JSON.stringify(flowData));
+
+    alert("Flow saved successfully!");
   };
 
   const nodeTypes = {
@@ -110,7 +133,7 @@ function FlowBuilder() {
           onConnect={onConnect}
           onDrop={onDrop}
           onDragOver={onDragOver}
-          onNodeClick={onNodeClick}  
+          onNodeClick={onNodeClick}
           nodeTypes={nodeTypes}
           fitView
         >
@@ -124,9 +147,19 @@ function FlowBuilder() {
       <div className="w-1/5 border-l p-4">
         <h2 className="font-bold mb-4">Settings Panel</h2>
 
+        {/* SAVE BUTTON */}
+        <button
+          onClick={handleSave}
+          className="bg-blue-500 text-white px-4 py-2 rounded mb-4 w-full"
+        >
+          Save Flow
+        </button>
+
         {selectedNode ? (
           <div>
-            <label className="block text-sm mb-2">Edit Message</label>
+            <label className="block text-sm mb-2">
+              Edit Message
+            </label>
 
             <input
               type="text"

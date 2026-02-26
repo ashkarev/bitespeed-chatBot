@@ -1,16 +1,81 @@
-# React + Vite
+# BiteSpeed Chatbot Flow Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a **frontend assignment submission for BiteSpeed**.
 
-Currently, two official plugins are available:
+It is a simple visual chatbot flow builder where users can create message flows by dragging, connecting, editing, and saving nodes.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+##  Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Drag and drop **Message Nodes** into canvas
+- Connect nodes using edges
+- Restrict to **one outgoing connection per node**
+- Multiple incoming connections allowed
+- Click node to **edit message text**
+- **Save flow with validation**
+- Flow stored using **localStorage**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+##  Validation Rules
+
+When saving:
+
+- If more than one node has **no outgoing connection**, an error is shown
+- Valid flows are saved successfully
+
+---
+
+##  Tech Stack
+
+- React (Vite)
+- React Flow
+- Tailwind CSS
+- JavaScript
+
+---
+
+##  Project Structure
+
+
+src/
+├── components/
+│ ├── FlowBuilder.jsx
+│ └── TextNode.jsx
+├── App.jsx
+└── main.jsx
+
+
+---
+
+##  How to Run Locally
+
+```bash
+git clone https://github.com/your-username/bitespeed-chatbot-builder.git
+cd bitespeed-chatbot-builder
+npm install
+npm run dev
+
+
+Assignment Notes
+
+This project fulfills all requirements of the BiteSpeed Frontend Task:
+
+Text Node creation
+
+Drag & drop functionality
+
+Edge connections with constraints
+
+Settings panel for editing text
+
+Save button with validation
+
+👨 Author
+
+Ashkar
+
+GitHub: https://github.com/ashkarev
+
+Portfolio: https://my-portfolio-llfn.vercel.app/
