@@ -11,7 +11,7 @@ function TextNode({ data }) {
       </div>
 
       {/* Message text */}
-      <div className="text-gray-700 break-words">
+      <div className="text-gray-700 ">
         {data.label}
       </div>
 
