@@ -26,7 +26,7 @@ function TextNode({ data }) {
       <Handle
         type="source"
         position={Position.Right}
-        className="w-2 h-2 bg-gray-500"
+        className="w-2 h-2 bg-gray-600"
       />
     </div>
   );
